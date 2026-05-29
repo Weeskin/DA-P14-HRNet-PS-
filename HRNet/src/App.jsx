@@ -1,122 +1,86 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import WHLogo from './assets/wealth-health-logo.png'
+import Select from './components/Select/Select'
 
-function App() {
-  const [count, setCount] = useState(0)
+const STATES = [
+  'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
+  'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
+  'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+  'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+  'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
+  'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+  'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon',
+  'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
+  'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
+  'West Virginia', 'Wisconsin', 'Wyoming',
+]
 
+const DEPARTMENTS = ['Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal']
+
+export default function App() {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen bg-white font-sans">
+      <header className="bg-[#2d7a3a] text-white px-6 py-4 flex items-center gap-4">
+        <img src={WHLogo} alt="Wealth Health logo" className="h-10" />
+        <h1 className="text-2xl font-medium">Wealth Health</h1>
+      </header>
 
-      <div className="ticks"></div>
+      <main className="max-w-2xl mx-auto px-4 py-8">
+        <a href="#" className="text-[#2d7a3a] hover:underline text-sm">
+          View Current Employees
+        </a>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <h2 className="text-xl font-medium mt-6 mb-6 text-gray-800">Create Employee</h2>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        <form className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-gray-700" htmlFor="first-name">First Name</label>
+            <input id="first-name" type="text" className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2d7a3a]" />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-gray-700" htmlFor="last-name">Last Name</label>
+            <input id="last-name" type="text" className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2d7a3a]" />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-gray-700" htmlFor="date-of-birth">Date of Birth</label>
+            <input id="date-of-birth" type="text" className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2d7a3a]" />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-gray-700" htmlFor="start-date">Start Date</label>
+            <input id="start-date" type="text" className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2d7a3a]" />
+          </div>
+
+          <fieldset className="border border-gray-300 rounded-md p-4 mt-2">
+            <legend className="text-sm font-medium text-gray-700 px-2">Address</legend>
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium text-gray-700" htmlFor="street">Street</label>
+                <input id="street" type="text" className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2d7a3a]" />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium text-gray-700" htmlFor="city">City</label>
+                <input id="city" type="text" className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2d7a3a]" />
+              </div>
+              <Select id="state" label="State" options={STATES} placeholder="-- Select State --" />
+              <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium text-gray-700" htmlFor="zip-code">Zip Code</label>
+                <input id="zip-code" type="number" className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2d7a3a]" />
+              </div>
+            </div>
+          </fieldset>
+
+          <Select id="department" label="Department" options={DEPARTMENTS} />
+
+          <button
+            type="button"
+            className="mt-4 bg-[#2d7a3a] text-white font-medium py-2 px-6 rounded-md hover:bg-[#1f5a29] transition-colors self-start"
+          >
+            Save
+          </button>
+        </form>
+      </main>
+    </div>
   )
 }
-
-export default App

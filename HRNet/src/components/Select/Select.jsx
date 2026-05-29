@@ -1,0 +1,31 @@
+export default function Select({ id, label, options, value, onChange, placeholder }) {
+  return (
+    <div className="flex flex-col gap-1">
+      {label && (
+        <label htmlFor={id} className="text-sm font-medium text-gray-700">
+          {label}
+        </label>
+      )}
+      <div className="relative">
+        <select
+          id={id}
+          value={value}
+          onChange={onChange}
+          className="w-full appearance-none border border-gray-300 rounded-md px-3 py-2 pr-10 bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#2d7a3a]"
+        >
+          {placeholder && <option value="">{placeholder}</option>}
+          {options.map((opt) => (
+            <option key={opt.value ?? opt} value={opt.value ?? opt}>
+              {opt.label ?? opt}
+            </option>
+          ))}
+        </select>
+        <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+          <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  )
+}
