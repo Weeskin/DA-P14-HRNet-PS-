@@ -7,6 +7,9 @@ import STATES from "../data/states.json"
 import DEPARTMENTS from "../data/departments.json"
 import { addEmployee } from "../store/employee-slice"
 
+// Options du menu déroulant State : nom complet comme valeur (stockée), abréviation comme libellé affiché.
+const STATE_OPTIONS = STATES.map((state) => ({ value: state.name, label: state.abbreviation }))
+
 const INITIAL_VALUES = {
   firstName: "", lastName: "", dateOfBirth: "", startDate: "",
   street: "", city: "", state: "", zipCode: "", department: "Sales",
@@ -91,7 +94,7 @@ export default function CreateEmployee() {
               {errors.city && <p className={ERROR_CLASS}>{errors.city}</p>}
             </div>
             <Select
-              id="state" label="State" options={STATES}
+              id="state" label="State" options={STATE_OPTIONS}
               placeholder="-- Select State --"
               value={values.state} onChange={handleChange}
               error={errors.state}
