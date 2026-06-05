@@ -24,6 +24,7 @@ Conversion de l'application HRNet (jQuery) en React.
 - [x] Plugin **DataTable** converti en React (`DataSheet` : tri, recherche, pagination)
 - [x] Données métier en `.json` (`states.json`, `departments.json`)
 - [x] Conventions de code + ESLint (`quotes` doubles, `curly` accolades)
+- [x] Migration en **TypeScript** (`strict`) : `.tsx`/`.ts`, store typé, props typées
 - [x] Contraintes `maxLength` sur les inputs + regex de validation plus strictes (données dans `validation-config.json`)
 
 ## À faire

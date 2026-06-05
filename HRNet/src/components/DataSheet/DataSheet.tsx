@@ -1,9 +1,25 @@
 import { useMemo, useState } from "react"
+import type { ChangeEvent } from "react"
 
 const PAGE_SIZES = [10, 25, 50, 100]
 
+interface Column<T> {
+  key: keyof T & string
+  label: string
+}
+
+interface DataSheetProps<T> {
+  columns: Column<T>[]
+  data: T[]
+}
+
+type SortState<T> = {
+  key: (keyof T & string) | null
+  dir: "asc" | "desc"
+}
+
 // --- COMPARE DEUX VALEURS POUR LE TRI : NUMÉRIQUE SI POSSIBLE, SINON ALPHABÉTIQUE. ---
-const compareValues = (a, b) => {
+const compareValues = (a: unknown, b: unknown): number => {
   const numA = Number(a)
   const numB = Number(b)
   if (!Number.isNaN(numA) && !Number.isNaN(numB) && a !== "" && b !== "") {
@@ -13,24 +29,25 @@ const compareValues = (a, b) => {
 }
 
 // --- TABLEAU RÉUTILISABLE EN REACT PUR : REMPLACE LE PLUGIN JQUERY DATATABLES (RECHERCHE, TRI, PAGINATION). ---
-export default function DataSheet({ columns, data }) {
+export default function DataSheet<T>({ columns, data }: DataSheetProps<T>) {
   // State et constantes
   const [search, setSearch] = useState("")
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0])
   const [page, setPage] = useState(1)
-  const [sort, setSort] = useState({ key: null, dir: "asc" })
+  const [sort, setSort] = useState<SortState<T>>({ key: null, dir: "asc" })
 
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase()
-    if (!term) {return data}
+    if (!term) { return data }
     return data.filter((row) =>
       columns.some((col) => String(row[col.key] ?? "").toLowerCase().includes(term)),
     )
   }, [data, columns, search])
 
   const sorted = useMemo(() => {
-    if (!sort.key) {return filtered}
-    const result = [...filtered].sort((a, b) => compareValues(a[sort.key], b[sort.key]))
+    const sortKey = sort.key
+    if (!sortKey) { return filtered }
+    const result = [...filtered].sort((a, b) => compareValues(a[sortKey], b[sortKey]))
     return sort.dir === "desc" ? result.reverse() : result
   }, [filtered, sort])
 
@@ -46,7 +63,7 @@ export default function DataSheet({ columns, data }) {
   // Comportement
 
   // --- BASCULE LE TRI SUR UNE COLONNE (ASC/DESC) OU L'ACTIVE SI ELLE EST INACTIVE. ---
-  const handleSort = (key) => {
+  const handleSort = (key: keyof T & string) => {
     setSort((prev) =>
       prev.key === key
         ? { key, dir: prev.dir === "asc" ? "desc" : "asc" }
@@ -55,13 +72,13 @@ export default function DataSheet({ columns, data }) {
   }
 
   // --- MET À JOUR LA RECHERCHE ET REVIENT À LA PREMIÈRE PAGE POUR ÉVITER UNE PAGE VIDE. ---
-  const handleSearch = (e) => {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
     setPage(1)
   }
 
   // --- CHANGE LE NOMBRE D'ENTRÉES PAR PAGE ET REVIENT À LA PREMIÈRE PAGE. ---
-  const handlePageSize = (e) => {
+  const handlePageSize = (e: ChangeEvent<HTMLSelectElement>) => {
     setPageSize(Number(e.target.value))
     setPage(1)
   }
@@ -130,7 +147,7 @@ export default function DataSheet({ columns, data }) {
                 <tr key={startIndex + rowIndex} className="border-b border-gray-200 hover:bg-gray-50">
                   {columns.map((col) => (
                     <td key={col.key} className="px-3 py-2 text-gray-800 whitespace-nowrap">
-                      {row[col.key]}
+                      {String(row[col.key])}
                     </td>
                   ))}
                 </tr>

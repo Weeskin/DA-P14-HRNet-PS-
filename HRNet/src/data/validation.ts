@@ -1,4 +1,5 @@
 import config from "./validation-config.json"
+import type { Employee, FormErrors } from "../types"
 
 // Limites de longueur des champs (données dans validation-config.json),
 // partagées avec les attributs maxLength du formulaire (source unique).
@@ -16,8 +17,8 @@ const PATTERNS = {
 }
 
 // --- VALIDE LE FORMULAIRE EMPLOYÉ ET RENVOIE UN OBJET D'ERREURS PAR CHAMP. ---
-export function validateForm(values) {
-  const errors = {}
+export function validateForm(values: Employee): FormErrors {
+  const errors: FormErrors = {}
 
   if (!values.firstName.trim()) { errors.firstName = "Required." }
   else if (values.firstName.length > FIELD_LIMITS.firstName) { errors.firstName = `Max ${FIELD_LIMITS.firstName} characters.` }

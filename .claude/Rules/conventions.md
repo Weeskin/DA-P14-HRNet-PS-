@@ -2,13 +2,13 @@
 
 ## Langage & Stack
 - Projet basé sur React 19 avec Vite
-- Utilisation de Javascript ES6+ et JSX
-- Pas de TypeScript
+- Utilisation de TypeScript (`.ts`) et TSX (`.tsx`), `strict: true` activé dans `tsconfig.json`
+- Typer les props des composants, l'état du store (`Employee`, `RootState`, `AppDispatch`) et les hooks (`useAppDispatch`/`useAppSelector`)
 - Utilisation de `const` et `let` pour les variables, pas de `var
 - Nommage des index de boucle avec des noms explicites (ex: `itemIndex` au lieu de `i`)
 - Guillemets doubles `"` pour les chaînes de caractères, pas les guillemets simples `'` (imposé par la règle ESLint `quotes`)
 - Toujours mettre les accolades `{}` pour les blocs `if`/`else`, même sur une seule ligne (imposé par la règle ESLint `curly`)
-- Les données pures (listes métier : États, départements…) sont stockées dans des fichiers `.json` dans `src/data`, pas en `.js`. Le `.js` est réservé au code avec logique (ex: `validation.js`).
+- Les données pures (listes métier : États, départements…) sont stockées dans des fichiers `.json` dans `src/data`, pas en `.ts`. Le `.ts` est réservé au code avec logique (ex: `validation.ts`).
 - Dans une constante tableau, un élément par ligne :
 ```js
 const tableau = [
@@ -23,10 +23,10 @@ const tableau = [
 | Type                        | Convention        | Exemple                   |
 |Fonctions                   | camelCase         | `loadPreset()`            |
 |Constantes globales         | UPPER_SNAKE_CASE  | `MAX_PRESETS`             |
-| Fichiers JS                 | kebab-case        | `preset-manager.js`       |
+| Fichiers TS                 | kebab-case        | `employee-slice.ts`       |
 | Fichiers CSS                | kebab-case        | `preset-card.css`         |
 | IDs / classes HTML          | kebab-case        | `preset-card`, `btn-load
-| Fichier JSX                     | PascalCase        | `PresetCard.jsx`          |
+| Fichier TSX                 | PascalCase        | `PresetCard.tsx`          |
 
 
 ## Fichier JSX

@@ -1,17 +1,19 @@
 import { useState } from "react"
+import type { ChangeEvent, FormEvent } from "react"
 import { Link } from "react-router-dom"
-import { useDispatch } from "react-redux"
 import Select from "../components/Select/Select"
 import InputField from "../components/InputField/InputField"
 import { validateForm, FIELD_LIMITS } from "../data/validation"
 import STATES from "../data/states.json"
 import DEPARTMENTS from "../data/departments.json"
 import { addEmployee } from "../store/employee-slice"
+import { useAppDispatch } from "../store/hooks"
+import type { Employee, FormErrors } from "../types"
 
 // Options du menu déroulant State : abréviation comme valeur (stockée), nom complet comme libellé affiché.
 const STATE_OPTIONS = STATES.map((state) => ({ value: state.abbreviation, label: state.name }))
 
-const INITIAL_VALUES = {
+const INITIAL_VALUES: Employee = {
   firstName: "", lastName: "", dateOfBirth: "", startDate: "",
   street: "", city: "", state: "", zipCode: "", department: "Sales",
 }
@@ -19,21 +21,22 @@ const INITIAL_VALUES = {
 // --- PAGE FORMULAIRE DE CRÉATION D'UN EMPLOYÉ. ---
 export default function CreateEmployee() {
   // State et constantes
-  const dispatch = useDispatch()
-  const [values, setValues] = useState(INITIAL_VALUES)
-  const [errors, setErrors] = useState({})
+  const dispatch = useAppDispatch()
+  const [values, setValues] = useState<Employee>(INITIAL_VALUES)
+  const [errors, setErrors] = useState<FormErrors>({})
 
   // Comportement
 
   // --- MET À JOUR LE CHAMP MODIFIÉ ET EFFACE SON ERREUR ÉVENTUELLE. ---
-  const handleChange = (e) => {
-    const { id, value } = e.target
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const id = e.target.id as keyof Employee
+    const { value } = e.target
     setValues((prev) => ({ ...prev, [id]: value }))
-    if (errors[id]) {setErrors((prev) => ({ ...prev, [id]: undefined }))}
+    if (errors[id]) { setErrors((prev) => ({ ...prev, [id]: undefined })) }
   }
 
   // --- VALIDE LE FORMULAIRE, ENREGISTRE L'EMPLOYÉ DANS LE STORE ET RÉINITIALISE LES CHAMPS. ---
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const validationErrors = validateForm(values)
     if (Object.keys(validationErrors).length > 0) {

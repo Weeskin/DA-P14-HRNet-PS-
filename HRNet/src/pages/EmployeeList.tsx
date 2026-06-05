@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
 import DataSheet from "../components/DataSheet/DataSheet"
+import { useAppSelector } from "../store/hooks"
+import type { Employee } from "../types"
 
-const COLUMNS = [
+const COLUMNS: { key: keyof Employee & string; label: string }[] = [
   { key: "firstName", label: "First Name" },
   { key: "lastName", label: "Last Name" },
   { key: "startDate", label: "Start Date" },
@@ -17,7 +18,7 @@ const COLUMNS = [
 // --- PAGE LISTE DES EMPLOYÉS ENREGISTRÉS, AFFICHÉS DANS LE TABLEAU DATASHEET. ---
 export default function EmployeeList() {
   // State et constantes
-  const employees = useSelector((state) => state.employees.list)
+  const employees = useAppSelector((state) => state.employees.list)
 
   // Rendu du composant
   return (
