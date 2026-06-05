@@ -125,7 +125,6 @@ export default function CreateEmployee() {
         <p className="mb-4">Employee Created!</p>
         <button
           type="button"
-          autoFocus
           onClick={handleCloseModal}
           className="bg-primary text-white font-medium py-2 px-6 rounded-md hover:bg-primary-dark transition-colors"
         >
