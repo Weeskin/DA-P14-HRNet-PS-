@@ -7,6 +7,16 @@
 - Utilisation de `const` et `let` pour les variables, pas de `var
 - Nommage des index de boucle avec des noms explicites (ex: `itemIndex` au lieu de `i`)
 - Guillemets doubles `"` pour les chaînes de caractères, pas les guillemets simples `'` (imposé par la règle ESLint `quotes`)
+- Toujours mettre les accolades `{}` pour les blocs `if`/`else`, même sur une seule ligne (imposé par la règle ESLint `curly`)
+- Les données pures (listes métier : États, départements…) sont stockées dans des fichiers `.json` dans `src/data`, pas en `.js`. Le `.js` est réservé au code avec logique (ex: `validation.js`).
+- Dans une constante tableau, un élément par ligne :
+```js
+const tableau = [
+  item1,
+  item2,
+  item3,
+]
+```
 
 ## Nommage
 

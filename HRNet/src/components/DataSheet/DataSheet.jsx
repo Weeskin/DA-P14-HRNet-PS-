@@ -22,14 +22,14 @@ export default function DataSheet({ columns, data }) {
 
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase()
-    if (!term) return data
+    if (!term) {return data}
     return data.filter((row) =>
       columns.some((col) => String(row[col.key] ?? "").toLowerCase().includes(term)),
     )
   }, [data, columns, search])
 
   const sorted = useMemo(() => {
-    if (!sort.key) return filtered
+    if (!sort.key) {return filtered}
     const result = [...filtered].sort((a, b) => compareValues(a[sort.key], b[sort.key]))
     return sort.dir === "desc" ? result.reverse() : result
   }, [filtered, sort])

@@ -19,6 +19,7 @@ export default defineConfig([
     },
     rules: {
       quotes: ["error", "double", { avoidEscape: true, allowTemplateLiterals: true }],
+      curly: ["error", "all"],
     },
   },
 ])

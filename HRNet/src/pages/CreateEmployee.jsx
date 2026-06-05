@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import Select from "../components/Select/Select"
 import { validateForm } from "../data/validation"
-import { STATES } from "../data/states"
-import { DEPARTMENTS } from "../data/departments"
+import STATES from "../data/states.json"
+import DEPARTMENTS from "../data/departments.json"
 import { addEmployee } from "../store/employee-slice"
 
 const INITIAL_VALUES = {
@@ -28,7 +28,7 @@ export default function CreateEmployee() {
   const handleChange = (e) => {
     const { id, value } = e.target
     setValues((prev) => ({ ...prev, [id]: value }))
-    if (errors[id]) setErrors((prev) => ({ ...prev, [id]: undefined }))
+    if (errors[id]) {setErrors((prev) => ({ ...prev, [id]: undefined }))}
   }
 
   // --- VALIDE LE FORMULAIRE, ENREGISTRE L'EMPLOYÉ DANS LE STORE ET RÉINITIALISE LES CHAMPS. ---
