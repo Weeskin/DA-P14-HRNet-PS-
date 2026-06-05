@@ -122,7 +122,15 @@ export default function CreateEmployee() {
       </form>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} title="Confirmation">
-        Employee Created!
+        <p className="mb-4">Employee Created!</p>
+        <button
+          type="button"
+          autoFocus
+          onClick={handleCloseModal}
+          className="bg-primary text-white font-medium py-2 px-6 rounded-md hover:bg-primary-dark transition-colors"
+        >
+          View Current Employees
+        </button>
       </Modal>
     </main>
   )
