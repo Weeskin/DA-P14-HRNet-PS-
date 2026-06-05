@@ -5,15 +5,15 @@ import Select from '../components/Select/Select'
 import { validateForm } from '../data/validation'
 import { STATES } from '../data/states'
 import { DEPARTMENTS } from '../data/departments'
-import { addEmployee } from '../store/employeeSlice'
+import { addEmployee } from '../store/employee-slice'
 
 const INITIAL_VALUES = {
   firstName: '', lastName: '', dateOfBirth: '', startDate: '',
   street: '', city: '', state: '', zipCode: '', department: 'Sales',
 }
 
-const inputClass = 'border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary'
-const errorClass = 'text-xs text-red-500 mt-1'
+const INPUT_CLASS = 'border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary'
+const ERROR_CLASS = 'text-xs text-red-500 mt-1'
 
 // --- PAGE FORMULAIRE DE CRÉATION D'UN EMPLOYÉ. ---
 export default function CreateEmployee() {
@@ -55,26 +55,26 @@ export default function CreateEmployee() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-gray-700" htmlFor="firstName">First Name</label>
-          <input id="firstName" type="text" value={values.firstName} onChange={handleChange} className={inputClass} />
-          {errors.firstName && <p className={errorClass}>{errors.firstName}</p>}
+          <input id="firstName" type="text" value={values.firstName} onChange={handleChange} className={INPUT_CLASS} />
+          {errors.firstName && <p className={ERROR_CLASS}>{errors.firstName}</p>}
         </div>
 
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-gray-700" htmlFor="lastName">Last Name</label>
-          <input id="lastName" type="text" value={values.lastName} onChange={handleChange} className={inputClass} />
-          {errors.lastName && <p className={errorClass}>{errors.lastName}</p>}
+          <input id="lastName" type="text" value={values.lastName} onChange={handleChange} className={INPUT_CLASS} />
+          {errors.lastName && <p className={ERROR_CLASS}>{errors.lastName}</p>}
         </div>
 
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-gray-700" htmlFor="dateOfBirth">Date of Birth</label>
-          <input id="dateOfBirth" type="date" value={values.dateOfBirth} onChange={handleChange} className={inputClass} />
-          {errors.dateOfBirth && <p className={errorClass}>{errors.dateOfBirth}</p>}
+          <input id="dateOfBirth" type="date" value={values.dateOfBirth} onChange={handleChange} className={INPUT_CLASS} />
+          {errors.dateOfBirth && <p className={ERROR_CLASS}>{errors.dateOfBirth}</p>}
         </div>
 
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-gray-700" htmlFor="startDate">Start Date</label>
-          <input id="startDate" type="date" value={values.startDate} onChange={handleChange} className={inputClass} />
-          {errors.startDate && <p className={errorClass}>{errors.startDate}</p>}
+          <input id="startDate" type="date" value={values.startDate} onChange={handleChange} className={INPUT_CLASS} />
+          {errors.startDate && <p className={ERROR_CLASS}>{errors.startDate}</p>}
         </div>
 
         <fieldset className="border border-gray-300 rounded-md p-4 mt-2">
@@ -82,13 +82,13 @@ export default function CreateEmployee() {
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-gray-700" htmlFor="street">Street</label>
-              <input id="street" type="text" value={values.street} onChange={handleChange} className={inputClass} />
-              {errors.street && <p className={errorClass}>{errors.street}</p>}
+              <input id="street" type="text" value={values.street} onChange={handleChange} className={INPUT_CLASS} />
+              {errors.street && <p className={ERROR_CLASS}>{errors.street}</p>}
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-gray-700" htmlFor="city">City</label>
-              <input id="city" type="text" value={values.city} onChange={handleChange} className={inputClass} />
-              {errors.city && <p className={errorClass}>{errors.city}</p>}
+              <input id="city" type="text" value={values.city} onChange={handleChange} className={INPUT_CLASS} />
+              {errors.city && <p className={ERROR_CLASS}>{errors.city}</p>}
             </div>
             <Select
               id="state" label="State" options={STATES}
@@ -98,8 +98,8 @@ export default function CreateEmployee() {
             />
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-gray-700" htmlFor="zipCode">Zip Code</label>
-              <input id="zipCode" type="text" value={values.zipCode} onChange={handleChange} className={inputClass} />
-              {errors.zipCode && <p className={errorClass}>{errors.zipCode}</p>}
+              <input id="zipCode" type="text" value={values.zipCode} onChange={handleChange} className={INPUT_CLASS} />
+              {errors.zipCode && <p className={ERROR_CLASS}>{errors.zipCode}</p>}
             </div>
           </div>
         </fieldset>
