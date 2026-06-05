@@ -1,8 +1,9 @@
 import { useState } from "react"
 import type { ChangeEvent, FormEvent } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Select from "../components/Select/Select"
 import InputField from "../components/InputField/InputField"
+import Modal from "../components/Modal/Modal"
 import { validateForm, FIELD_LIMITS } from "../data/validation"
 import STATES from "../data/states.json"
 import DEPARTMENTS from "../data/departments.json"
@@ -22,8 +23,10 @@ const INITIAL_VALUES: Employee = {
 export default function CreateEmployee() {
   // State et constantes
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const [values, setValues] = useState<Employee>(INITIAL_VALUES)
   const [errors, setErrors] = useState<FormErrors>({})
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Comportement
 
@@ -45,6 +48,13 @@ export default function CreateEmployee() {
     }
     dispatch(addEmployee(values))
     setValues(INITIAL_VALUES)
+    setIsModalOpen(true)
+  }
+
+  // --- FERME LA MODALE DE CONFIRMATION ET REDIRIGE VERS LA LISTE DES EMPLOYÉS. ---
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    navigate("/employees")
   }
 
   // Rendu du composant
@@ -110,6 +120,10 @@ export default function CreateEmployee() {
           Save
         </button>
       </form>
+
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title="Confirmation">
+        Employee Created!
+      </Modal>
     </main>
   )
 }
