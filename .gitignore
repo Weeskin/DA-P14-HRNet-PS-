@@ -1,2 +1,5 @@
 /P12_Front-end-master/
-/.claude/
+.idea/
+
+# Dossier .claude versionné (conventions, réglages partagés), sauf les réglages locaux/perso
+/.claude/settings.local.json
