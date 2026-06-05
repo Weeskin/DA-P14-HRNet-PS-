@@ -6,6 +6,7 @@
 - Pas de TypeScript
 - Utilisation de `const` et `let` pour les variables, pas de `var
 - Nommage des index de boucle avec des noms explicites (ex: `itemIndex` au lieu de `i`)
+- Guillemets doubles `"` pour les chaînes de caractères, pas les guillemets simples `'` (imposé par la règle ESLint `quotes`)
 
 ## Nommage
 

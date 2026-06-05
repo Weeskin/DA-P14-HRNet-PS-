@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState } from "react"
 
 const PAGE_SIZES = [10, 25, 50, 100]
 
@@ -6,32 +6,32 @@ const PAGE_SIZES = [10, 25, 50, 100]
 const compareValues = (a, b) => {
   const numA = Number(a)
   const numB = Number(b)
-  if (!Number.isNaN(numA) && !Number.isNaN(numB) && a !== '' && b !== '') {
+  if (!Number.isNaN(numA) && !Number.isNaN(numB) && a !== "" && b !== "") {
     return numA - numB
   }
-  return String(a ?? '').localeCompare(String(b ?? ''))
+  return String(a ?? "").localeCompare(String(b ?? ""))
 }
 
 // --- TABLEAU RÉUTILISABLE EN REACT PUR : REMPLACE LE PLUGIN JQUERY DATATABLES (RECHERCHE, TRI, PAGINATION). ---
 export default function DataSheet({ columns, data }) {
   // State et constantes
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState("")
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0])
   const [page, setPage] = useState(1)
-  const [sort, setSort] = useState({ key: null, dir: 'asc' })
+  const [sort, setSort] = useState({ key: null, dir: "asc" })
 
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase()
     if (!term) return data
     return data.filter((row) =>
-      columns.some((col) => String(row[col.key] ?? '').toLowerCase().includes(term)),
+      columns.some((col) => String(row[col.key] ?? "").toLowerCase().includes(term)),
     )
   }, [data, columns, search])
 
   const sorted = useMemo(() => {
     if (!sort.key) return filtered
     const result = [...filtered].sort((a, b) => compareValues(a[sort.key], b[sort.key]))
-    return sort.dir === 'desc' ? result.reverse() : result
+    return sort.dir === "desc" ? result.reverse() : result
   }, [filtered, sort])
 
   const totalEntries = sorted.length
@@ -49,8 +49,8 @@ export default function DataSheet({ columns, data }) {
   const handleSort = (key) => {
     setSort((prev) =>
       prev.key === key
-        ? { key, dir: prev.dir === 'asc' ? 'desc' : 'asc' }
-        : { key, dir: 'asc' },
+        ? { key, dir: prev.dir === "asc" ? "desc" : "asc" }
+        : { key, dir: "asc" },
     )
   }
 
@@ -110,7 +110,7 @@ export default function DataSheet({ columns, data }) {
                     <span className="inline-flex items-center gap-1">
                       {col.label}
                       <span className="text-gray-400 text-xs">
-                        {active ? (sort.dir === 'asc' ? '▲' : '▼') : '⇅'}
+                        {active ? (sort.dir === "asc" ? "▲" : "▼") : "⇅"}
                       </span>
                     </span>
                   </th>

@@ -1,7 +1,7 @@
-import { Routes, Route, Link } from 'react-router-dom'
-import WHLogo from './assets/wealth-health-logo.png'
-import CreateEmployee from './pages/CreateEmployee'
-import EmployeeList from './pages/EmployeeList'
+import { Routes, Route, Link } from "react-router-dom"
+import WHLogo from "./assets/wealth-health-logo.png"
+import CreateEmployee from "./pages/CreateEmployee"
+import EmployeeList from "./pages/EmployeeList"
 
 // --- LAYOUT GLOBAL (EN-TÊTE PARTAGÉ) ET DÉFINITION DES ROUTES DE L'APPLICATION. ---
 export default function App() {

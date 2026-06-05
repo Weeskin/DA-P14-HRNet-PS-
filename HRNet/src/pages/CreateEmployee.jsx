@@ -1,19 +1,19 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import Select from '../components/Select/Select'
-import { validateForm } from '../data/validation'
-import { STATES } from '../data/states'
-import { DEPARTMENTS } from '../data/departments'
-import { addEmployee } from '../store/employee-slice'
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import Select from "../components/Select/Select"
+import { validateForm } from "../data/validation"
+import { STATES } from "../data/states"
+import { DEPARTMENTS } from "../data/departments"
+import { addEmployee } from "../store/employee-slice"
 
 const INITIAL_VALUES = {
-  firstName: '', lastName: '', dateOfBirth: '', startDate: '',
-  street: '', city: '', state: '', zipCode: '', department: 'Sales',
+  firstName: "", lastName: "", dateOfBirth: "", startDate: "",
+  street: "", city: "", state: "", zipCode: "", department: "Sales",
 }
 
-const INPUT_CLASS = 'border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary'
-const ERROR_CLASS = 'text-xs text-red-500 mt-1'
+const INPUT_CLASS = "border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+const ERROR_CLASS = "text-xs text-red-500 mt-1"
 
 // --- PAGE FORMULAIRE DE CRÉATION D'UN EMPLOYÉ. ---
 export default function CreateEmployee() {

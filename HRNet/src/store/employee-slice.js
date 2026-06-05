@@ -1,11 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   list: [],
 }
 
 const employeeSlice = createSlice({
-  name: 'employees',
+  name: "employees",
   initialState,
   reducers: {
     // --- AJOUTE UN EMPLOYÉ À LA LISTE (IMMER GÈRE L'IMMUTABILITÉ). ---
