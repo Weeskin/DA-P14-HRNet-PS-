@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import Select from "../components/Select/Select"
-import { validateForm } from "../data/validation"
+import { validateForm, FIELD_LIMITS } from "../data/validation"
 import STATES from "../data/states.json"
 import DEPARTMENTS from "../data/departments.json"
 import { addEmployee } from "../store/employee-slice"
@@ -55,13 +55,13 @@ export default function CreateEmployee() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-gray-700" htmlFor="firstName">First Name</label>
-          <input id="firstName" type="text" value={values.firstName} onChange={handleChange} className={INPUT_CLASS} />
+          <input id="firstName" type="text" maxLength={FIELD_LIMITS.firstName} value={values.firstName} onChange={handleChange} className={INPUT_CLASS} />
           {errors.firstName && <p className={ERROR_CLASS}>{errors.firstName}</p>}
         </div>
 
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-gray-700" htmlFor="lastName">Last Name</label>
-          <input id="lastName" type="text" value={values.lastName} onChange={handleChange} className={INPUT_CLASS} />
+          <input id="lastName" type="text" maxLength={FIELD_LIMITS.lastName} value={values.lastName} onChange={handleChange} className={INPUT_CLASS} />
           {errors.lastName && <p className={ERROR_CLASS}>{errors.lastName}</p>}
         </div>
 
@@ -82,12 +82,12 @@ export default function CreateEmployee() {
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-gray-700" htmlFor="street">Street</label>
-              <input id="street" type="text" value={values.street} onChange={handleChange} className={INPUT_CLASS} />
+              <input id="street" type="text" maxLength={FIELD_LIMITS.street} value={values.street} onChange={handleChange} className={INPUT_CLASS} />
               {errors.street && <p className={ERROR_CLASS}>{errors.street}</p>}
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-gray-700" htmlFor="city">City</label>
-              <input id="city" type="text" value={values.city} onChange={handleChange} className={INPUT_CLASS} />
+              <input id="city" type="text" maxLength={FIELD_LIMITS.city} value={values.city} onChange={handleChange} className={INPUT_CLASS} />
               {errors.city && <p className={ERROR_CLASS}>{errors.city}</p>}
             </div>
             <Select
@@ -98,7 +98,7 @@ export default function CreateEmployee() {
             />
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-gray-700" htmlFor="zipCode">Zip Code</label>
-              <input id="zipCode" type="text" value={values.zipCode} onChange={handleChange} className={INPUT_CLASS} />
+              <input id="zipCode" type="text" maxLength={FIELD_LIMITS.zipCode} value={values.zipCode} onChange={handleChange} className={INPUT_CLASS} />
               {errors.zipCode && <p className={ERROR_CLASS}>{errors.zipCode}</p>}
             </div>
           </div>
