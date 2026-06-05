@@ -29,14 +29,21 @@ Conversion de l'application HRNet (jQuery) en React.
 
 - [ ] Plugin **DatePicker** : composant React
 - [ ] Publier le DatePicker en **package npm**
+- [ ] Contrainte sur les champs **maxlenght**
 - [ ] Intégrer le DatePicker à la place des `<input type="date">`
 - [ ] Plugin **Modale** de confirmation après création d'un employé
 - [ ] Persistance des employés (localStorage) *(optionnel)*
 - [ ] Tests de performance **Lighthouse** : comparaison ancienne (jQuery) vs nouvelle app (React)
 - [ ] Documentation / rapport de performance
+- [ ] Tests unitaires et end-to-end
 - [ ] Déploiement
 
 ## Notes
 
 - État Redux non persisté pour l'instant : un refresh vide la liste.
 - Le lien « View Current Employees » et le logo renvoient vers les bonnes routes.
+
+
+## Tests à mettre en place
+- Tests unitaires pour les fonctions utilitaires (ex: validation du formulaire)
+- Playwright pour les tests end-to-end (ex: création d'un employé, navigation entre pages)
