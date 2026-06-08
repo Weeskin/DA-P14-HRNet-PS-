@@ -29,7 +29,7 @@ const compareValues = (a: unknown, b: unknown): number => {
 }
 
 // --- TABLEAU RÉUTILISABLE EN REACT PUR : REMPLACE LE PLUGIN JQUERY DATATABLES (RECHERCHE, TRI, PAGINATION). ---
-export default function DataSheet<T>({ columns, data }: DataSheetProps<T>) {
+export default function DataTable<T>({ columns, data }: DataSheetProps<T>) {
   // State et constantes
   const [search, setSearch] = useState("")
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0])

@@ -4,12 +4,12 @@ Conversion de l'application HRNet (jQuery) en React.
 
 ## Les 4 plugins jQuery à convertir
 
-| # | Plugin jQuery d'origine | Usage | Composant React | État |
-|---|-------------------------|-------|-----------------|------|
-| 1 | Select menu / dropdown  | State, Department | `components/Select/Select.tsx` | ✅ Fait |
-| 2 | DataTable               | Liste des employés | `components/DataSheet/DataSheet.tsx` | ✅ Fait |
-| 3 | Date picker             | Date of Birth, Start Date | *(à venir — package npm)* | ⬜ À faire |
-| 4 | Modale (jquery.modal.js)| Confirmation création | `components/Modal/Modal.tsx` | ✅ Fait |
+| # | Plugin jQuery d'origine | Usage | Composant React                      | État |
+|---|-------------------------|-------|--------------------------------------|------|
+| 1 | Select menu / dropdown  | State, Department | `components/Select/Select.tsx`       | ✅ Fait |
+| 2 | DataTable               | Liste des employés | `components/DataTable/DataTable.tsx` | ✅ Fait |
+| 3 | Date picker             | Date of Birth, Start Date | *(à venir — package npm)*            | ⬜ À faire |
+| 4 | Modale (jquery.modal.js)| Confirmation création | `components/Modal/Modal.tsx`         | ✅ Fait |
 
 > Rappel : au moins **un** plugin doit être converti et publié en **package npm** → ce sera le **DatePicker**.
 
@@ -21,7 +21,7 @@ Conversion de l'application HRNet (jQuery) en React.
 - [x] Store Redux Toolkit (`employee-slice`, action `addEmployee`)
 - [x] Champs date en `<input type="date">` *(temporaire, en attendant le DatePicker)*
 - [x] Plugin **Select** converti en React
-- [x] Plugin **DataTable** converti en React (`DataSheet` : tri, recherche, pagination)
+- [x] Plugin **DataTable** converti en React (`DataTable` : tri, recherche, pagination)
 - [x] Données métier en `.json` (`states.json`, `departments.json`)
 - [x] Conventions de code + ESLint (`quotes` doubles, `curly` accolades)
 - [x] Migration en **TypeScript** (`strict`) : `.tsx`/`.ts`, store typé, props typées
