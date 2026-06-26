@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import DataTable from "../components/DataTable/DataTable"
+import DataSheet from "../components/DataTable/DataSheet"
 import { useAppSelector } from "../store/hooks"
 import type { Employee } from "../types"
 
