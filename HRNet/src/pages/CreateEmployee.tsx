@@ -3,6 +3,7 @@ import type { ChangeEvent, FormEvent } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Select from "../components/Select/Select"
 import InputField from "../components/InputField/InputField"
+import DatePicker from "../components/DatePicker/DatePicker"
 import Modal from "../components/Modal/Modal"
 import { validateForm, FIELD_LIMITS } from "../data/validation"
 import STATES from "../data/states.json"
@@ -29,6 +30,12 @@ export default function CreateEmployee() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Comportement
+
+  // --- MET À JOUR UN CHAMP DATE (ISO) ET EFFACE SON ERREUR ÉVENTUELLE. ---
+  const handleDateChange = (field: "dateOfBirth" | "startDate") => (isoValue: string) => {
+    setValues((prev) => ({ ...prev, [field]: isoValue }))
+    if (errors[field]) { setErrors((prev) => ({ ...prev, [field]: undefined })) }
+  }
 
   // --- MET À JOUR LE CHAMP MODIFIÉ ET EFFACE SON ERREUR ÉVENTUELLE. ---
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -75,13 +82,13 @@ export default function CreateEmployee() {
           id="lastName" label="Last Name" maxLength={FIELD_LIMITS.lastName}
           value={values.lastName} onChange={handleChange} error={errors.lastName}
         />
-        <InputField
-          id="dateOfBirth" label="Date of Birth" type="date"
-          value={values.dateOfBirth} onChange={handleChange} error={errors.dateOfBirth}
+        <DatePicker
+          id="dateOfBirth" label="Date of Birth"
+          value={values.dateOfBirth} onChange={handleDateChange("dateOfBirth")} error={errors.dateOfBirth}
         />
-        <InputField
-          id="startDate" label="Start Date" type="date"
-          value={values.startDate} onChange={handleChange} error={errors.startDate}
+        <DatePicker
+          id="startDate" label="Start Date"
+          value={values.startDate} onChange={handleDateChange("startDate")} error={errors.startDate}
         />
 
         <fieldset className="border border-gray-300 rounded-md p-4 mt-2">

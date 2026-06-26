@@ -30,42 +30,59 @@ export const parseISO = (value: string): Date | null => {
 
 // --- FORMATE UNE Date POUR L'AFFICHAGE "MM/DD/YYYY". ---
 export const formatDisplay = (date: Date): string => {
-  // TODO
-  throw new Error("TODO")
+  const month = pad(date.getMonth() + 1)
+  const day = pad(date.getDate())
+  const year = date.getFullYear()
+  return `${month}/${day}/${year}`
 }
 
 // --- PARSE UNE SAISIE "MM/DD/YYYY" EN Date (null si invalide). ---
 export const parseDisplay = (value: string): Date | null => {
-    const date = new Date(Date.parse(value));
-    return date;
+  const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(value)
+  if (!match) { return null }
+
+  const month = Number(match[1]) - 1 // 0-indexé
+  const day = Number(match[2])
+  const year = Number(match[3])
+  const date = new Date(year, month, day)
+
+  // Même garde-fou que parseISO : vérifie qu'il n'y a pas de débordement silencieux
+  if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
+    return null
+  }
+  return date
 }
 
 // --- NOMBRE DE JOURS DANS LE MOIS (month : 0 = janvier). Astuce : new Date(y, m+1, 0).getDate(). ---
 export const daysInMonth = (year: number, month: number): number => {
-  // TODO
-  throw new Error("TODO")
+  // Le jour 0 du mois suivant = dernier jour du mois courant
+  return new Date(year, month + 1, 0).getDate()
 }
 
 // --- JOUR DE SEMAINE DU 1ER DU MOIS (0 = dimanche). Astuce : new Date(y, m, 1).getDay(). ---
 export const startWeekday = (year: number, month: number): number => {
-  // TODO
-  throw new Error("TODO")
+  return new Date(year, month, 1).getDay()
 }
 
 // --- RENVOIE UNE NOUVELLE Date DÉCALÉE DE n JOURS. ---
 export const addDays = (date: Date, n: number): Date => {
-  // TODO
-  throw new Error("TODO")
+  // On passe par les composantes locales pour éviter les dérives DST
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + n)
 }
 
 // --- VRAI SI LES DEUX DATES SONT LE MÊME JOUR. ---
 export const isSameDay = (a: Date, b: Date): boolean => {
-  // TODO
-  throw new Error("TODO")
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  )
 }
 
 // --- VRAI SI date EST DANS LES BORNES [min, max] (inclusives, bornes optionnelles). ---
 export const isWithinRange = (date: Date, min: Date | null, max: Date | null): boolean => {
-  // TODO
-  throw new Error("TODO")
+  const time = date.getTime()
+  if (min !== null && time < new Date(min.getFullYear(), min.getMonth(), min.getDate()).getTime()) { return false }
+  if (max !== null && time > new Date(max.getFullYear(), max.getMonth(), max.getDate()).getTime()) { return false }
+  return true
 }
