@@ -28,8 +28,27 @@ export function validateForm(values: Employee): FormErrors {
   else if (values.lastName.length > FIELD_LIMITS.lastName) { errors.lastName = `Max ${FIELD_LIMITS.lastName} characters.` }
   else if (!PATTERNS.name.test(values.lastName)) { errors.lastName = MESSAGES.lastName }
 
-  if (!values.dateOfBirth) { errors.dateOfBirth = "Required." }
-  if (!values.startDate) { errors.startDate = "Required." }
+  if (!values.dateOfBirth) {
+    errors.dateOfBirth = "Required."
+  } else {
+    const dob = new Date(values.dateOfBirth)
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const ageYears = today.getFullYear() - dob.getFullYear() - (
+      today < new Date(today.getFullYear(), dob.getMonth(), dob.getDate()) ? 1 : 0
+    )
+    if (dob > today) { errors.dateOfBirth = MESSAGES.dateOfBirthFuture }
+    else if (ageYears < 16) { errors.dateOfBirth = MESSAGES.dateOfBirthTooYoung }
+    else if (ageYears > 100) { errors.dateOfBirth = MESSAGES.dateOfBirthTooOld }
+  }
+
+  if (!values.startDate) {
+    errors.startDate = "Required."
+  } else if (values.dateOfBirth && !errors.dateOfBirth) {
+    const dob = new Date(values.dateOfBirth)
+    const minStart = new Date(dob.getFullYear() + 16, dob.getMonth(), dob.getDate())
+    if (new Date(values.startDate) < minStart) { errors.startDate = MESSAGES.startDateBeforeBirth }
+  }
 
   if (!values.street.trim()) { errors.street = "Required." }
   else if (values.street.length > FIELD_LIMITS.street) { errors.street = `Max ${FIELD_LIMITS.street} characters.` }

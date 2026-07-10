@@ -11,6 +11,10 @@
     "lastName": "Letters, single hyphens/apostrophes only, no leading or trailing separator.",
     "street": "Invalid street address.",
     "city": "Letters, single hyphens/apostrophes only, no leading or trailing separator.",
-    "zipCode": "Enter a valid ZIP code (e.g. 12345 or 12345-6789)."
+    "zipCode": "Enter a valid ZIP code (e.g. 12345 or 12345-6789).",
+    "dateOfBirthFuture": "Date of birth cannot be in the future.",
+    "dateOfBirthTooYoung": "Employee must be at least 16 years old.",
+    "dateOfBirthTooOld": "Date of birth cannot be more than 100 years ago.",
+    "startDateBeforeBirth": "Start date cannot be before the employee's 16th birthday."
   }
 }
