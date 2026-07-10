@@ -23,6 +23,9 @@ importers:
       react-router-dom:
         specifier: ^7.17.0
         version: 7.17.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      wh-react-datepicker:
+        specifier: link:..\wh-react-datepicker
+        version: link:../wh-react-datepicker
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
