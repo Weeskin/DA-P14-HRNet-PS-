@@ -5,13 +5,9 @@
   src: url("./assets/fonts/Google Sans/GoogleSans-VariableFont_GRAD,opsz,wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
-}
-
-@font-face {
-  font-family: "Google Sans";
-  src: url("./assets/fonts/Google Sans/GoogleSans-Italic-VariableFont_GRAD,opsz,wght.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: italic;
+  /* Affiche la police système immédiatement, swap vers Google Sans quand chargée */
+  /* optional : le browser n'attend pas la font si elle n'est pas en cache → élimine la font du chemin critique LCP */
+  font-display: optional;
 }
 
 @theme {
