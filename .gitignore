@@ -1,5 +1,6 @@
 /P12_Front-end-master/
 .idea/
+/wh-react-datepicker/
 
 # Dossier .claude versionné (conventions, réglages partagés), sauf les réglages locaux/perso
 /.claude/settings.local.json
