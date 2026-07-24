@@ -7,6 +7,9 @@ import "wh-react-datepicker/dist/style.css"
 import App from "./App"
 import { store } from "./store/store"
 
+// Expose le store pour les seeds de démo via la console navigateur
+;(window as unknown as { __store__: typeof store }).__store__ = store
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>

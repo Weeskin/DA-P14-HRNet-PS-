@@ -18,8 +18,12 @@ const employeeSlice = createSlice({
     addEmployee(state, action: PayloadAction<Employee>) {
       state.list.push(action.payload)
     },
+    // --- REMPLACE TOUTE LA LISTE (UTILISÉ POUR LES SEEDS DE DÉMO). ---
+    setAll(state, action: PayloadAction<Employee[]>) {
+      state.list = action.payload
+    },
   },
 })
 
-export const { addEmployee } = employeeSlice.actions
+export const { addEmployee, setAll } = employeeSlice.actions
 export default employeeSlice.reducer
