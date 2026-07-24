@@ -24,8 +24,8 @@ importers:
         specifier: ^7.17.0
         version: 7.17.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       wh-react-datepicker:
-        specifier: ^1.0.0
-        version: 1.0.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        specifier: ^1.2.0
+        version: 1.2.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
@@ -1246,8 +1246,8 @@ packages:
       jsdom:
         optional: true
 
-  wh-react-datepicker@1.0.0:
-    resolution: {integrity: sha512-Bi/7cIMKZM4dYANwtMVTsWdohYZi+qF66SOqyiyG12URsadh70dcQeKnOa8xO+Ji8JRmbd/55RWrmWBr0u8y3g==}
+  wh-react-datepicker@1.2.0:
+    resolution: {integrity: sha512-LadzAyQLWAB42EWKfSdIBehNR1e3hfHKA/+cXQ2pUIwnVVYarRr0FV3x1ch5JhvMupWUJYNeT4ezGBqeU45RrA==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -2314,7 +2314,7 @@ snapshots:
     transitivePeerDependencies:
       - msw
 
-  wh-react-datepicker@1.0.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
+  wh-react-datepicker@1.2.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
     dependencies:
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)

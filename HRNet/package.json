@@ -20,7 +20,7 @@
     "react-dom": "^19.2.6",
     "react-redux": "^9.3.0",
     "react-router-dom": "^7.17.0",
-    "wh-react-datepicker": "^1.0.0"
+    "wh-react-datepicker": "^1.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
