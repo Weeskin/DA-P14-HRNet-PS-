@@ -37,7 +37,7 @@ Conversion de l'application HRNet (jQuery) en React.
 - [x] Documentation / rapport de performance (`COMPARAISON.md` à la racine du projet)
 - [x] Tests **end-to-end Playwright** : 32 tests (validation, navigation, recherche, tri, pagination)
 - [x] Tests unitaires Vitest : `date-utils.ts` (30 tests) + `validation.ts` (35 tests) — `pnpm test` dans `HRNet/`
-- [ ] Déploiement
+- [x] Déploiement
 - [ ] Persistance des employés (localStorage) *(optionnel)*
 
 ## Notes

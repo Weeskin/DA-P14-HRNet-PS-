@@ -1,0 +1,47 @@
+// ============================================================
+// SEED 2000 EMPLOYÉS — snippet console pour démo Lighthouse jQuery
+// ============================================================
+// 1. Ouvrir employee-list.html dans Chrome
+// 2. Ouvrir la console (F12 → Console)
+// 3. Coller ce snippet et appuyer sur Entrée
+// 4. Recharger la page (F5) → 2000 lignes dans DataTables
+// 5. Lancer Lighthouse (F12 → Lighthouse → Analyser)
+// ============================================================
+
+(function () {
+  const FIRST_NAMES = ["James","Mary","John","Patricia","Robert","Jennifer","Michael","Linda","William","Barbara","David","Elizabeth","Richard","Susan","Joseph","Jessica","Thomas","Sarah","Charles","Karen","Christopher","Lisa","Daniel","Nancy","Matthew","Betty","Anthony","Margaret","Mark","Sandra","Donald","Ashley","Steven","Dorothy","Paul","Kimberly","Andrew","Emily","Kenneth","Donna","Joshua","Michelle","Kevin","Carol","Brian","Amanda","George","Melissa","Timothy","Deborah"];
+  const LAST_NAMES = ["Smith","Johnson","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez","Hernandez","Lopez","Gonzalez","Wilson","Anderson","Thomas","Taylor","Moore","Jackson","Martin","Lee","Perez","Thompson","White","Harris","Sanchez","Clark","Ramirez","Lewis","Robinson","Walker","Young","Allen","King","Wright","Scott","Torres","Nguyen","Hill","Flores","Green","Adams","Nelson","Baker","Hall","Rivera","Campbell","Mitchell","Carter","Roberts"];
+  const STREETS = ["Main St","Oak Ave","Maple Dr","Cedar Ln","Pine St","Elm St","Washington Blvd","Park Ave","Lake Dr","Hill Rd","River Rd","Forest Ave","Valley Dr","Sunset Blvd","Church St"];
+  const CITIES = ["Springfield","Riverside","Fairview","Georgetown","Salem","Franklin","Greenville","Bristol","Clinton","Madison","Oxford","Burlington","Newport","Arlington","Lexington"];
+  const STATES = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
+  const DEPARTMENTS = ["Sales","Marketing","Engineering","Human Resources","Legal"];
+
+  function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+  function pad(n) { return String(n).padStart(2, "0"); }
+  function isoDate(year, month, day) { return year + "-" + pad(month) + "-" + pad(day); }
+
+  const employees = [];
+  for (let i = 0; i < 2000; i++) {
+    const birthYear = randInt(1950, 1999);
+    const birthMonth = randInt(1, 12);
+    const birthDay = randInt(1, 28);
+    const startYear = randInt(birthYear + 16, 2024);
+    const startMonth = randInt(1, 12);
+    const startDay = randInt(1, 28);
+    employees.push({
+      firstName: rand(FIRST_NAMES),
+      lastName: rand(LAST_NAMES),
+      dateOfBirth: isoDate(birthYear, birthMonth, birthDay),
+      startDate: isoDate(startYear, startMonth, startDay),
+      street: randInt(1, 9999) + " " + rand(STREETS),
+      city: rand(CITIES),
+      state: rand(STATES),
+      zipCode: String(randInt(10000, 99999)),
+      department: rand(DEPARTMENTS),
+    });
+  }
+
+  localStorage.setItem("employees", JSON.stringify(employees));
+  console.log("%c✅ 2000 employés écrits dans localStorage — recharge la page (F5) !", "color: green; font-weight: bold; font-size: 14px");
+})();
