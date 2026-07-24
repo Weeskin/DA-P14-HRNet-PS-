@@ -26,7 +26,7 @@ export default function Select({ id, label, options, value, onChange, placeholde
           id={id}
           value={value}
           onChange={onChange}
-          className="w-full appearance-none font-sans border border-gray-300 rounded-md px-3 py-2 pr-10 bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+          className={`w-full appearance-none font-sans rounded-md px-3 py-2 pr-10 bg-white cursor-pointer focus:outline-none focus:ring-2 ${error ? "border border-red-500 focus:ring-red-500" : "border border-gray-300 focus:ring-primary"}`}
         >
           {placeholder && <option value="">{placeholder}</option>}
           {options.map((opt) => {

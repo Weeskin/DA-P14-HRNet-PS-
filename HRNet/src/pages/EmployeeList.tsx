@@ -16,8 +16,8 @@ const COLUMNS: { key: keyof Employee & string; label: string }[] = [
 ]
 
 // --- PAGE LISTE DES EMPLOYÉS ENREGISTRÉS, AFFICHÉS DANS LE TABLEAU DATASHEET. ---
-export default function EmployeeList() {
   // State et constantes
+export default function EmployeeList() {
   const employees = useAppSelector((state) => state.employees.list)
 
   // Rendu du composant
