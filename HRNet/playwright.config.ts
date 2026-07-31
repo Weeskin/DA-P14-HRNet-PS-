@@ -2,11 +2,15 @@ import { defineConfig, devices } from "@playwright/test"
 
 export default defineConfig({
   testDir: "./e2e",
-  // Lance le serveur de preview avant les tests
+  // Build puis serveur de preview avant les tests. Le build est indispensable :
+  // `preview` ne sert que le contenu de dist/, donc sans lui les tests valideraient
+  // le dernier build en date et pourraient passer au vert sur du code déjà cassé.
   webServer: {
-    command: "pnpm preview",
+    command: "pnpm build && pnpm preview",
     url: "http://localhost:4173",
-    reuseExistingServer: !process.env.CI,
+    // Jamais de réutilisation : un serveur déjà lancé servirait un dist/ obsolète
+    // et court-circuiterait le build ci-dessus.
+    reuseExistingServer: false,
   },
   use: {
     baseURL: "http://localhost:4173",
