@@ -35,7 +35,8 @@ Conversion de l'application HRNet (jQuery) en React.
 - [x] Publier le DatePicker en **package npm** (repo séparé `wh-react-datepicker`, build lib Vite)
 - [x] Tests de performance **Lighthouse** : comparaison jQuery vs React — voir `COMPARAISON.md`
 - [x] Documentation / rapport de performance (`COMPARAISON.md` à la racine du projet)
-- [x] Tests **end-to-end Playwright** : 35 tests (validation, navigation, recherche, tri, pagination, persistance)
+- [x] Tests **end-to-end Playwright** : 40 tests (validation, navigation, recherche, tri, pagination,
+      persistance, dataset de démo)
 - [x] Tests unitaires Vitest : `validation.ts` (35 tests) — `pnpm test` dans `HRNet/`
 - [x] Tests unitaires du DatePicker : `date-utils.ts` (30 tests) — `pnpm test` dans le repo `wh-react-datepicker`
 - [x] Déploiement
@@ -46,12 +47,16 @@ Conversion de l'application HRNet (jQuery) en React.
 - État Redux persisté dans `localStorage` (`store/persistence.ts`, clé `employees`) : un refresh
   conserve la liste. Pas de `redux-persist` — un `store.subscribe` suffit ici.
 - Le lien « View Current Employees » et le logo renvoient vers les bonnes routes.
+- **Dataset de démo** : `/employees?seed=2000` charge `public/employees-2000.json`
+  (2000 employés, 389 Ko / 57 Ko gzip). Sans le paramètre, l'app est dans son état normal —
+  les deux démos (fonctionnelle et perf) se font sans rien recompiler. En mode seed la
+  persistance est désactivée : la démo ne laisse rien dans le `localStorage`.
 - Lighthouse scores : React 100/100/100/100 vs jQuery 87/94/92/80 (2000 employés mockés).
   ⚠️ **Les mesures React sont à refaire** : le seed passait par `window.__store__` (mémoire seule),
   donc le rechargement effectué par Lighthouse en mode « Navigation » vidait la liste avant la
-  mesure. Le seed écrit désormais dans `localStorage`, comme celui de la version jQuery — même
-  protocole des deux côtés (voir `lighthouse-seed-2000.txt`).
-- 35 tests E2E Playwright passent en ~11s (`pnpm test:e2e` dans `HRNet/`).
+  mesure — le score React était mesuré sur une table vide. Voir « Protocole de mesure » dans
+  `COMPARAISON.md`.
+- 40 tests E2E Playwright passent en ~11s (`pnpm test:e2e` dans `HRNet/`).
 - Fixtures mock réutilisables dans `HRNet/e2e/fixtures/employees.ts` (12 employés).
 - `window.__store__` n'est exposé qu'en développement (`import.meta.env.DEV`), pas dans le bundle
   de production.

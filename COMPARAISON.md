@@ -3,6 +3,47 @@
 **Outil** : Lighthouse 13.3.0 · **Émulation** : Ordinateur · **Dataset** : 2 000 employés mockés
 **Date** : 17 juillet 2026
 
+> ⚠️ **Les mesures React de ce document sont à refaire.** Le dataset était injecté via
+> `window.__store__`, donc en mémoire seule : le rechargement effectué par Lighthouse en mode
+> « Navigation » vidait la liste avant la mesure, alors que la version jQuery lisait la sienne
+> depuis `localStorage` et la conservait. Les scores React ci-dessous ont donc été mesurés sur une
+> table vide. Le protocole corrigé est décrit juste en dessous.
+
+---
+
+## Protocole de mesure
+
+### Chargement du dataset
+
+| Version | Comment les 2 000 employés arrivent | Coût réseau du dataset |
+|---|---|---|
+| **jQuery** | `localStorage` lu au `$(function(){…})` (`employee-list.js:2`), seedé par `lighthouse-seed-jquery.txt` | 0 Ko |
+| **React** | `fetch` de `public/employees-2000.json` déclenché par `/employees?seed=2000` | 389 Ko, **57 Ko gzip** |
+
+Sans le paramètre `?seed=2000`, React est dans son état normal : la démo fonctionnelle
+(création d'employé, validation des champs, DatePicker) et la démo de performance se font
+donc sans recompiler ni modifier le code.
+
+### Asymétrie assumée
+
+Les deux pages font des requêtes HTTP — la version jQuery en fait même davantage :
+`employee-list.html` charge 5 ressources, dont **3 depuis deux domaines tiers**
+(`ajax.googleapis.com`, `cdn.datatables.net`), avec les résolutions DNS et poignées de main TLS
+correspondantes. React n'a aucune dépendance externe.
+
+La seule asymétrie restante porte sur le dataset lui-même : React le transfère sur le réseau
+(57 Ko gzip), jQuery le lit dans le `localStorage` pour 0 Ko. **C'est un handicap pour React**,
+et il est assumé : si React gagne malgré ces 57 Ko supplémentaires, le résultat n'en est que
+plus solide. Cette ligne doit être reportée dans le total de charge réseau ci-dessous.
+
+### Conditions à respecter
+
+- Servir le **build de production** des deux côtés (`pnpm build && pnpm preview` pour React)
+- Chrome en navigation privée, aucune autre extension ni onglet
+- **Ne pas cocher « Clear storage »** : cela viderait le `localStorage` de la version jQuery
+  avant la mesure (React n'est pas concerné, son dataset vient du réseau)
+- 3 mesures consécutives, médiane retenue
+
 ---
 
 ## Scores globaux

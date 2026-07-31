@@ -25,6 +25,17 @@ const isEmployee = (value: unknown): value is Employee => {
   return requiredFields.every((field) => typeof candidate[field] === "string")
 }
 
+// --- DÉTECTE LE MODE MESURE LIGHTHOUSE (?seed=N DANS L'URL). ---
+// Dans ce mode la persistance est désactivée : sans ça, les 2000 employés du dataset
+// seraient écrits dans le localStorage et resteraient affichés après la démo.
+export const isSeedMode = (): boolean => {
+  try {
+    return new URLSearchParams(window.location.search).has("seed")
+  } catch {
+    return false
+  }
+}
+
 // --- LIT LA LISTE D'EMPLOYÉS DEPUIS LE LOCALSTORAGE. ---
 // Retourne undefined si absente ou illisible, pour laisser le reducer utiliser son initialState.
 export const loadEmployees = (): Employee[] | undefined => {
