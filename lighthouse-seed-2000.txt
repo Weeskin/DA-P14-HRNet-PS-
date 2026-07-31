@@ -1,11 +1,20 @@
 // ============================================================
-// SEED 2000 EMPLOYÉS — snippet console pour démo Lighthouse
+// SEED 2000 EMPLOYÉS — snippet console pour démo Lighthouse (React)
 // ============================================================
-// 1. Ouvrir l'app dans Chrome (F5 pour vider le store)
-// 2. Ouvrir la console (F12 → Console)
+// Protocole IDENTIQUE à celui de la version jQuery (lighthouse-seed-jquery.txt) :
+// les deux applications lisent leur dataset depuis localStorage["employees"],
+// donc les données survivent au rechargement que Lighthouse effectue avant de mesurer.
+//
+// 1. Servir le BUILD de production : `pnpm build && pnpm preview` dans HRNet/
+// 2. Ouvrir l'app dans Chrome, ouvrir la console (F12 → Console)
 // 3. Coller ce snippet et appuyer sur Entrée
-// 4. Aller sur /employees → 2000 lignes chargées
-// 5. Lancer Lighthouse (F12 → Lighthouse → Analyser)
+// 4. Recharger la page (F5) → aller sur /employees → 2000 employés chargés
+// 5. Lancer Lighthouse (F12 → Lighthouse → Analyser) en mode « Navigation »
+//    ⚠️ NE PAS cocher « Clear storage » : cela viderait le dataset avant la mesure
+//       (même contrainte pour les deux versions, la comparaison reste équitable).
+//
+// Pour repartir d'une liste vide :
+//    localStorage.removeItem("employees"); location.reload()
 // ============================================================
 
 (function () {
@@ -42,6 +51,6 @@
     });
   }
 
-  window.__store__.dispatch({ type: "employees/setAll", payload: employees });
-  console.log("%c✅ 2000 employés injectés dans le store !", "color: green; font-weight: bold; font-size: 14px");
+  localStorage.setItem("employees", JSON.stringify(employees));
+  console.log("%c✅ 2000 employés écrits dans localStorage — recharge la page (F5) !", "color: green; font-weight: bold; font-size: 14px");
 })();

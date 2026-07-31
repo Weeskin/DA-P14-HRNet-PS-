@@ -10,8 +10,8 @@ export async function fillDatePicker(page: Page, label: string, mmddyyyy: string
 
 // --- REMPLIT ET SOUMET LE FORMULAIRE POUR UN EMPLOYÉ, FERME LA MODALE. ---
 // Laisse la page sur /employees après exécution.
-// Utilise le lien "Home" si on est déjà sur /employees pour préserver le store Redux
-// (page.goto() ferait un rechargement complet qui vide l'état en mémoire).
+// Navigation via le lien "Home" plutôt que page.goto() quand on est déjà sur /employees :
+// évite un rechargement complet à chaque employé créé (le store est persisté, mais c'est plus rapide).
 export async function createEmployee(page: Page, emp: MockEmployee) {
   const currentUrl = page.url()
   if (currentUrl.includes("/employees")) {

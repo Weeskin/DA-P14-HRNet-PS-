@@ -7,7 +7,7 @@ Conversion de l'application HRNet (jQuery) en React.
 | # | Plugin jQuery d'origine | Usage | Composant React                      | État |
 |---|-------------------------|-------|--------------------------------------|------|
 | 1 | Select menu / dropdown  | State, Department | `components/Select/Select.tsx`       | ✅ Fait |
-| 2 | DataTable               | Liste des employés | `components/DataTable/DataTable.tsx` | ✅ Fait |
+| 2 | DataTable               | Liste des employés | `components/DataTable/DataSheet.tsx` | ✅ Fait |
 | 3 | Date picker             | Date of Birth, Start Date | `wh-react-datepicker` (package npm) | ✅ Fait |
 | 4 | Modale (jquery.modal.js)| Confirmation création | `components/Modal/Modal.tsx`         | ✅ Fait |
 
@@ -35,15 +35,25 @@ Conversion de l'application HRNet (jQuery) en React.
 - [x] Publier le DatePicker en **package npm** (repo séparé `wh-react-datepicker`, build lib Vite)
 - [x] Tests de performance **Lighthouse** : comparaison jQuery vs React — voir `COMPARAISON.md`
 - [x] Documentation / rapport de performance (`COMPARAISON.md` à la racine du projet)
-- [x] Tests **end-to-end Playwright** : 32 tests (validation, navigation, recherche, tri, pagination)
-- [x] Tests unitaires Vitest : `date-utils.ts` (30 tests) + `validation.ts` (35 tests) — `pnpm test` dans `HRNet/`
+- [x] Tests **end-to-end Playwright** : 35 tests (validation, navigation, recherche, tri, pagination, persistance)
+- [x] Tests unitaires Vitest : `validation.ts` (35 tests) — `pnpm test` dans `HRNet/`
+- [x] Tests unitaires du DatePicker : `date-utils.ts` (30 tests) — `pnpm test` dans le repo `wh-react-datepicker`
 - [x] Déploiement
-- [ ] Persistance des employés (localStorage) *(optionnel)*
+- [x] Persistance des employés (localStorage)
 
 ## Notes
 
-- État Redux non persisté : un refresh vide la liste (pas de redux-persist).
+- État Redux persisté dans `localStorage` (`store/persistence.ts`, clé `employees`) : un refresh
+  conserve la liste. Pas de `redux-persist` — un `store.subscribe` suffit ici.
 - Le lien « View Current Employees » et le logo renvoient vers les bonnes routes.
 - Lighthouse scores : React 100/100/100/100 vs jQuery 87/94/92/80 (2000 employés mockés).
-- 32 tests E2E Playwright passent en ~5s (`pnpm test:e2e` dans `HRNet/`).
+  ⚠️ **Les mesures React sont à refaire** : le seed passait par `window.__store__` (mémoire seule),
+  donc le rechargement effectué par Lighthouse en mode « Navigation » vidait la liste avant la
+  mesure. Le seed écrit désormais dans `localStorage`, comme celui de la version jQuery — même
+  protocole des deux côtés (voir `lighthouse-seed-2000.txt`).
+- 35 tests E2E Playwright passent en ~11s (`pnpm test:e2e` dans `HRNet/`).
 - Fixtures mock réutilisables dans `HRNet/e2e/fixtures/employees.ts` (12 employés).
+- `window.__store__` n'est exposé qu'en développement (`import.meta.env.DEV`), pas dans le bundle
+  de production.
+- Le repo `wh-react-datepicker` doit être cloné en dossier frère seulement pour travailler sur le
+  DatePicker ; HRNet consomme la version publiée sur npm et se build sans lui.

@@ -1,4 +1,6 @@
 {
   "extends": "./tsconfig.json",
+  // Le build de production ne type-check pas les tests : ils n'entrent pas dans le bundle.
+  // `pnpm typecheck` (tsconfig.json) les couvre, lui.
   "exclude": ["src/__tests__"]
 }

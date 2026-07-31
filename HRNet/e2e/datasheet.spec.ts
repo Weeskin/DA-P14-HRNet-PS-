@@ -5,7 +5,8 @@ import { MOCK_EMPLOYEES } from "./fixtures/employees"
 
 // --- FIXTURE WORKER-SCOPED : CRÉE LES 12 EMPLOYÉS UNE SEULE FOIS POUR TOUT LE FICHIER. ---
 // Évite de recréer les données à chaque test (performances + cohérence).
-const test = base.extend<{}, { populatedPage: Page }>({
+// Pas de fixture test-scoped ici, uniquement une worker-scoped : d'où le premier paramètre vide.
+const test = base.extend<Record<string, never>, { populatedPage: Page }>({
   populatedPage: [async ({ browser }, use) => {
     const context = await browser.newContext()
     const page = await context.newPage()
