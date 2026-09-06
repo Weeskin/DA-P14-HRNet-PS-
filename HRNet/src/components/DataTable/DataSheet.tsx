@@ -18,7 +18,7 @@ type SortState<T> = {
   dir: "asc" | "desc"
 }
 
-// --- COMPARE DEUX VALEURS POUR LE TRI : NUMÉRIQUE SI POSSIBLE, SINON ALPHABÉTIQUE. ---
+// --- COMPARES TWO VALUES FOR SORTING: NUMERIC IF POSSIBLE, ALPHABETIC OTHERWISE. ---
 const compareValues = (a: unknown, b: unknown): number => {
   const numA = Number(a)
   const numB = Number(b)
@@ -28,9 +28,9 @@ const compareValues = (a: unknown, b: unknown): number => {
   return String(a ?? "").localeCompare(String(b ?? ""))
 }
 
-// --- TABLEAU RÉUTILISABLE EN REACT PUR : REMPLACE LE PLUGIN JQUERY DATATABLES (RECHERCHE, TRI, PAGINATION). ---
+// --- PURE REACT TABLE: REPLACES THE JQUERY DATATABLES PLUGIN (SEARCH, SORT, PAGINATION). ---
 export default function DataTable<T>({ columns, data }: DataSheetProps<T>) {
-  // State et constantes
+  // State and constants
   const [search, setSearch] = useState("")
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0])
   const [page, setPage] = useState(1)
@@ -60,9 +60,9 @@ export default function DataTable<T>({ columns, data }: DataSheetProps<T>) {
   const firstShown = totalEntries === 0 ? 0 : startIndex + 1
   const lastShown = Math.min(startIndex + pageSize, totalEntries)
 
-  // Comportement
+  // Behavior
 
-  // --- BASCULE LE TRI SUR UNE COLONNE (ASC/DESC) OU L'ACTIVE SI ELLE EST INACTIVE. ---
+  // --- TOGGLES SORT ON A COLUMN (ASC/DESC) OR ACTIVATES IT IF INACTIVE. ---
   const handleSort = (key: keyof T & string) => {
     setSort((prev) =>
       prev.key === key
@@ -71,19 +71,19 @@ export default function DataTable<T>({ columns, data }: DataSheetProps<T>) {
     )
   }
 
-  // --- MET À JOUR LA RECHERCHE ET REVIENT À LA PREMIÈRE PAGE POUR ÉVITER UNE PAGE VIDE. ---
+  // --- UPDATES THE SEARCH AND RESETS TO PAGE 1 TO AVOID AN EMPTY PAGE. ---
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
     setPage(1)
   }
 
-  // --- CHANGE LE NOMBRE D'ENTRÉES PAR PAGE ET REVIENT À LA PREMIÈRE PAGE. ---
+  // --- CHANGES THE PAGE SIZE AND RESETS TO PAGE 1. ---
   const handlePageSize = (e: ChangeEvent<HTMLSelectElement>) => {
     setPageSize(Number(e.target.value))
     setPage(1)
   }
 
-  // Rendu du composant
+  // Component render
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">

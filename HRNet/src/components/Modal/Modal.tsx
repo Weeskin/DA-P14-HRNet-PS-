@@ -9,16 +9,16 @@ interface ModalProps {
   title?: string
 }
 
-// --- MODALE RÉUTILISABLE BASÉE SUR LE <dialog> NATIF (REMPLACE LE PLUGIN JQUERY jquery-modal). ---
-// showModal() gère le backdrop, la mise en inert de la page et la touche Échap ;
-// le focus clavier est confiné par le composant FocusTrap.
+// --- REUSABLE MODAL BASED ON THE NATIVE <dialog> (REPLACES THE JQUERY jquery-modal PLUGIN). ---
+// showModal() handles the backdrop, page inert state and Escape key;
+// keyboard focus is confined by the FocusTrap component.
 export default function Modal({ isOpen, onClose, children, title }: ModalProps) {
-  // State et constantes
+  // State and constants
   const dialogRef = useRef<HTMLDialogElement>(null)
 
-  // Comportement
+  // Behavior
 
-  // --- SYNCHRONISE L'OUVERTURE/FERMETURE NATIVE DU <dialog> AVEC LA PROP isOpen. ---
+  // --- SYNCS THE NATIVE <dialog> OPEN/CLOSE WITH THE isOpen PROP. ---
   useEffect(() => {
     const dialog = dialogRef.current
     if (!dialog) { return }
@@ -26,12 +26,12 @@ export default function Modal({ isOpen, onClose, children, title }: ModalProps) 
     else if (!isOpen && dialog.open) { dialog.close() }
   }, [isOpen])
 
-  // --- FERME EN CLIQUANT SUR LE BACKDROP (UN CLIC SUR LE BACKDROP A POUR CIBLE LE <dialog>). ---
+  // --- CLOSES ON BACKDROP CLICK (A CLICK ON THE BACKDROP TARGETS THE <dialog> ELEMENT). ---
   const handleBackdropClick = (e: MouseEvent<HTMLDialogElement>) => {
     if (e.target === dialogRef.current) { dialogRef.current?.close() }
   }
 
-  // Rendu du composant
+  // Component render
   return (
     <dialog
       ref={dialogRef}

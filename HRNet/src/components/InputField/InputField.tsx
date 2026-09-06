@@ -15,9 +15,9 @@ interface InputFieldProps {
   maxLength?: number
 }
 
-// --- CHAMP DE FORMULAIRE RÉUTILISABLE : LABEL + INPUT + MESSAGE D'ERREUR. ---
+// --- REUSABLE FORM FIELD: LABEL + INPUT + ERROR MESSAGE. ---
 export default function InputField({ id, label, type = "text", value, onChange, error, maxLength }: InputFieldProps) {
-  // Rendu du composant
+  // Component render
   return (
     <div className="flex flex-col gap-1">
       <label className="text-sm font-medium text-gray-700" htmlFor={id}>{label}</label>

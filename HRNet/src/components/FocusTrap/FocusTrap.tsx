@@ -8,21 +8,21 @@ interface FocusTrapProps {
   children: ReactNode
 }
 
-// --- PIÈGE DE FOCUS RÉUTILISABLE : CONFINE LE FOCUS CLAVIER (TAB) À SES ENFANTS QUAND isActive. ---
+// --- REUSABLE FOCUS TRAP: CONFINES KEYBOARD FOCUS (TAB) TO ITS CHILDREN WHEN isActive. ---
 export default function FocusTrap({ isActive, children }: FocusTrapProps) {
-  // State et constantes
+  // State and constants
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Comportement
+  // Behavior
 
-  // --- PLACE LE FOCUS SUR LE PREMIER ÉLÉMENT FOCUSABLE À L'ACTIVATION. ---
+  // --- MOVES FOCUS TO THE FIRST FOCUSABLE ELEMENT ON ACTIVATION. ---
   useEffect(() => {
     if (!isActive) { return }
     const focusables = containerRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
     focusables?.[0]?.focus()
   }, [isActive])
 
-  // --- FAIT BOUCLER LE FOCUS ENTRE LE PREMIER ET LE DERNIER ÉLÉMENT FOCUSABLE. ---
+  // --- CYCLES FOCUS BETWEEN THE FIRST AND LAST FOCUSABLE ELEMENTS. ---
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (!isActive || e.key !== "Tab") { return }
     const container = containerRef.current
@@ -41,7 +41,7 @@ export default function FocusTrap({ isActive, children }: FocusTrapProps) {
     }
   }
 
-  // Rendu du composant
+  // Component render
   return (
     <div ref={containerRef} onKeyDown={handleKeyDown}>
       {children}

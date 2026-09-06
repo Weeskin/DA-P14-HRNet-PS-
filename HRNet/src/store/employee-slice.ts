@@ -14,11 +14,11 @@ const employeeSlice = createSlice({
   name: "employees",
   initialState,
   reducers: {
-    // --- AJOUTE UN EMPLOYÉ À LA LISTE (IMMER GÈRE L'IMMUTABILITÉ). ---
+    // --- ADDS AN EMPLOYEE TO THE LIST (IMMER HANDLES IMMUTABILITY). ---
     addEmployee(state, action: PayloadAction<Employee>) {
       state.list.push(action.payload)
     },
-    // --- REMPLACE TOUTE LA LISTE (UTILISÉ POUR LES SEEDS DE DÉMO). ---
+    // --- REPLACES THE ENTIRE LIST (USED FOR DEMO SEEDS). ---
     setAll(state, action: PayloadAction<Employee[]>) {
       state.list = action.payload
     },

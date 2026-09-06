@@ -2,9 +2,9 @@ import { Routes, Route, Link } from "react-router-dom"
 import CreateEmployee from "./pages/CreateEmployee"
 import EmployeeList from "./pages/EmployeeList"
 
-// --- LAYOUT GLOBAL (EN-TÊTE PARTAGÉ) ET DÉFINITION DES ROUTES DE L'APPLICATION. ---
+// --- GLOBAL LAYOUT (SHARED HEADER) AND APPLICATION ROUTE DEFINITIONS. ---
 export default function App() {
-  // Rendu du composant
+  // Component render
   return (
     <div className="min-h-screen bg-white font-sans">
       <header className="bg-primary text-white px-6 py-4 flex items-center gap-4">

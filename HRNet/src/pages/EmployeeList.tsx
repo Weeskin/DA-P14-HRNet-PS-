@@ -17,20 +17,20 @@ const COLUMNS: { key: keyof Employee & string; label: string }[] = [
   { key: "zipCode", label: "Zip Code" },
 ]
 
-// --- PAGE LISTE DES EMPLOYÉS ENREGISTRÉS, AFFICHÉS DANS LE TABLEAU DATASHEET. ---
+// --- EMPLOYEE LIST PAGE, DISPLAYS SAVED EMPLOYEES IN THE DATASHEET TABLE. ---
 export default function EmployeeList() {
-  // State et constantes
+  // State and constants
   const employees = useAppSelector((state) => state.employees.list)
   const dispatch = useAppDispatch()
   const [searchParams] = useSearchParams()
 
-  // Comportement
-  // Mode mesure Lighthouse : /employees?seed=2000 charge public/employees-2000.json.
-  // Sur /employees (sans paramètre) rien n'est chargé : l'app reste dans son état normal,
-  // et il n'y a donc aucune ligne à commenter/décommenter entre les deux démos.
+  // Behavior
+  // Lighthouse measurement mode: /employees?seed=2000 loads public/employees-2000.json.
+  // On /employees (without parameter) nothing is loaded: the app stays in its normal state,
+  // so there is nothing to comment/uncomment between the two demos.
   useEffect(() => {
     const seedSize = searchParams.get("seed")
-    // Chiffres uniquement : le paramètre construit un nom de fichier
+    // Digits only: the parameter is used to build a filename
     if (seedSize === null || !/^\d+$/.test(seedSize)) {
       return
     }
@@ -39,7 +39,7 @@ export default function EmployeeList() {
     fetch(`${import.meta.env.BASE_URL}employees-${seedSize}.json`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Dataset ${seedSize} introuvable (${response.status})`)
+          throw new Error(`Dataset ${seedSize} not found (${response.status})`)
         }
         return response.json() as Promise<Employee[]>
       })
@@ -49,7 +49,7 @@ export default function EmployeeList() {
         }
       })
       .catch(() => {
-        // Dataset absent ou illisible : la page reste utilisable avec la liste courante
+        // Dataset missing or unreadable: the page stays usable with the current list
       })
 
     return () => {
@@ -57,7 +57,7 @@ export default function EmployeeList() {
     }
   }, [searchParams, dispatch])
 
-  // Rendu du composant
+  // Component render
   return (
     <main className="max-w-5xl mx-auto px-4 py-8">
       <Link to="/" className="text-primary hover:underline text-sm">

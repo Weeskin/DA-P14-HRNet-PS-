@@ -12,7 +12,7 @@ interface SelectProps {
   error?: string
 }
 
-// --- MENU DÉROULANT RÉUTILISABLE : ACCEPTE DES CHAÎNES OU DES OBJETS { value, label }. ---
+// --- REUSABLE DROPDOWN: ACCEPTS STRINGS OR { value, label } OBJECTS. ---
 export default function Select({ id, label, options, value, onChange, placeholder, error }: SelectProps) {
   return (
     <div className="flex flex-col gap-1">

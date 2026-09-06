@@ -23,6 +23,9 @@
     "react-router-dom": "^7.17.0",
     "wh-react-datepicker": "^1.2.0"
   },
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.61.1",

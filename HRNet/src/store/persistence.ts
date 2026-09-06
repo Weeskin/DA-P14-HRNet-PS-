@@ -1,11 +1,11 @@
 import type { Employee } from "../types"
 
-// Clé volontairement identique à celle utilisée par la version jQuery d'origine :
-// les deux applications se seedent donc exactement de la même façon pour les mesures Lighthouse.
+// Intentionally the same key used by the original jQuery version:
+// both apps seed from localStorage the same way for Lighthouse measurements.
 const STORAGE_KEY = "employees"
 
-// --- VÉRIFIE QU'UNE VALEUR PARSÉE A BIEN LA FORME D'UN EMPLOYÉ. ---
-// Le localStorage est modifiable par l'utilisateur : on ne fait pas confiance à son contenu.
+// --- CHECKS THAT A PARSED VALUE HAS THE SHAPE OF AN EMPLOYEE. ---
+// localStorage can be modified by the user — its content is not trusted.
 const isEmployee = (value: unknown): value is Employee => {
   if (typeof value !== "object" || value === null) {
     return false
@@ -25,9 +25,9 @@ const isEmployee = (value: unknown): value is Employee => {
   return requiredFields.every((field) => typeof candidate[field] === "string")
 }
 
-// --- DÉTECTE LE MODE MESURE LIGHTHOUSE (?seed=N DANS L'URL). ---
-// Dans ce mode la persistance est désactivée : sans ça, les 2000 employés du dataset
-// seraient écrits dans le localStorage et resteraient affichés après la démo.
+// --- DETECTS LIGHTHOUSE MEASUREMENT MODE (?seed=N IN THE URL). ---
+// In this mode persistence is disabled: without this, the 2000 employees from the dataset
+// would be written to localStorage and remain visible after the demo.
 export const isSeedMode = (): boolean => {
   try {
     return new URLSearchParams(window.location.search).has("seed")
@@ -36,8 +36,8 @@ export const isSeedMode = (): boolean => {
   }
 }
 
-// --- LIT LA LISTE D'EMPLOYÉS DEPUIS LE LOCALSTORAGE. ---
-// Retourne undefined si absente ou illisible, pour laisser le reducer utiliser son initialState.
+// --- LOADS THE EMPLOYEE LIST FROM LOCALSTORAGE. ---
+// Returns undefined if missing or unreadable, so the reducer uses its initialState.
 export const loadEmployees = (): Employee[] | undefined => {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
@@ -48,19 +48,19 @@ export const loadEmployees = (): Employee[] | undefined => {
     if (!Array.isArray(parsed)) {
       return undefined
     }
-    // Une entrée corrompue ne doit pas faire planter le rendu de la table
+    // A corrupted entry must not crash the table render
     return parsed.filter(isEmployee)
   } catch {
-    // localStorage indisponible (navigation privée, quota, storage désactivé) ou JSON invalide
+    // localStorage unavailable (private browsing, quota, storage disabled) or invalid JSON
     return undefined
   }
 }
 
-// --- ÉCRIT LA LISTE D'EMPLOYÉS DANS LE LOCALSTORAGE. ---
+// --- SAVES THE EMPLOYEE LIST TO LOCALSTORAGE. ---
 export const saveEmployees = (list: Employee[]): void => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list))
   } catch {
-    // Quota dépassé ou storage indisponible : l'app reste fonctionnelle sans persistance
+    // Quota exceeded or storage unavailable: the app remains functional without persistence
   }
 }

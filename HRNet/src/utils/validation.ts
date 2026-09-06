@@ -1,14 +1,14 @@
-import config from "./validation-config.json"
+import config from "../data/validation-config.json"
 import type { Employee, FormErrors } from "../types"
 
-// Limites de longueur des champs (données dans validation-config.json),
-// partagées avec les attributs maxLength du formulaire (source unique).
+// Field length limits (from validation-config.json),
+// shared with the form's maxLength attributes (single source of truth).
 export const FIELD_LIMITS = config.limits
 
 const MESSAGES = config.messages
 
-// Regex strictes : la valeur commence et finit par un caractère valide,
-// sans séparateur (espace, tiret, apostrophe) en double ni en début/fin.
+// Strict regexes: the value starts and ends with a valid character,
+// with no duplicate separator (space, dash, apostrophe) or one at start/end.
 const PATTERNS = {
   name:    /^[A-Za-zÀ-ÿ]+(?:[ '-][A-Za-zÀ-ÿ]+)*$/,
   street:  /^[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .,'#-]*$/,
@@ -16,7 +16,7 @@ const PATTERNS = {
   zipCode: /^\d{5}(-\d{4})?$/,
 }
 
-// --- VALIDE LE FORMULAIRE EMPLOYÉ ET RENVOIE UN OBJET D'ERREURS PAR CHAMP. ---
+// --- VALIDATES THE EMPLOYEE FORM AND RETURNS AN ERROR OBJECT PER FIELD. ---
 export function validateForm(values: Employee): FormErrors {
   const errors: FormErrors = {}
 

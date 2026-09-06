@@ -1,16 +1,42 @@
-# React + Vite
+# HRNet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React rewrite of the legacy jQuery HRNet application — internal HR tool for Wealth Health.
 
-Currently, two official plugins are available:
+## Tech stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + Vite 8
+- TypeScript (strict mode)
+- Redux Toolkit
+- React Router v7
+- Tailwind CSS v4
+- [`wh-react-datepicker`](../wh-react-datepicker) — local workspace package
 
-## React Compiler
+## Getting started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+pnpm install
+pnpm dev
+```
 
-## Expanding the ESLint configuration
+## Available scripts
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Command | Description |
+|---|---|
+| `pnpm dev` | Start development server |
+| `pnpm build` | Type-check and build for production |
+| `pnpm preview` | Preview production build |
+| `pnpm test` | Run unit tests (Vitest) |
+| `pnpm test:e2e` | Run end-to-end tests (Playwright) |
+| `pnpm lint` | Run ESLint |
+
+## Lighthouse performance demo
+
+**React app** — load 2000 employees via URL parameter:
+
+```
+http://localhost:5173/employees?seed=2000
+```
+
+The dataset is served from `public/employees-2000.json`. No console snippet needed.
+
+**jQuery app** — see `../lighthouse-seed-jquery.txt` for the console snippet.

@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest"
-import { validateForm, FIELD_LIMITS } from "../data/validation"
+import { validateForm, FIELD_LIMITS } from "../utils/validation"
 import type { Employee } from "../types"
 
-// Employé valide utilisé comme base dans tous les tests — on surcharge les champs à tester.
+// Valid employee used as base in all tests — fields to test are overridden.
 const VALID_EMPLOYEE: Employee = {
   firstName: "Jean",
   lastName: "Dupont",
@@ -15,7 +15,7 @@ const VALID_EMPLOYEE: Employee = {
   department: "Sales",
 }
 
-// --- HELPER : renvoie un employé avec un champ surchargé. ---
+// --- HELPER: returns an employee with an overridden field. ---
 const withField = (field: Partial<Employee>): Employee => ({ ...VALID_EMPLOYEE, ...field })
 
 describe("validateForm", () => {

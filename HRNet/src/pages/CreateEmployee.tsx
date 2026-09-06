@@ -5,14 +5,14 @@ import Select from "../components/Select/Select"
 import InputField from "../components/InputField/InputField"
 import { DatePicker } from "wh-react-datepicker"
 import Modal from "../components/Modal/Modal"
-import { validateForm, FIELD_LIMITS } from "../data/validation"
+import { validateForm, FIELD_LIMITS } from "../utils/validation"
 import STATES from "../data/states.json"
 import DEPARTMENTS from "../data/departments.json"
 import { addEmployee } from "../store/employee-slice"
 import { useAppDispatch } from "../store/hooks"
 import type { Employee, FormErrors } from "../types"
 
-// Options du menu déroulant State : abréviation comme valeur (stockée), nom complet comme libellé affiché.
+// State dropdown options: abbreviation as value (stored), full name as displayed label.
 const STATE_OPTIONS = STATES.map((state) => ({ value: state.abbreviation, label: state.name }))
 
 const INITIAL_VALUES: Employee = {
@@ -20,24 +20,24 @@ const INITIAL_VALUES: Employee = {
   street: "", city: "", state: "", zipCode: "", department: "Sales",
 }
 
-// --- PAGE FORMULAIRE DE CRÉATION D'UN EMPLOYÉ. ---
+// --- EMPLOYEE CREATION FORM PAGE. ---
 export default function CreateEmployee() {
-  // State et constantes
+  // State and constants
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [values, setValues] = useState<Employee>(INITIAL_VALUES)
   const [errors, setErrors] = useState<FormErrors>({})
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Comportement
+  // Behavior
 
-  // --- MET À JOUR UN CHAMP DATE (ISO) ET EFFACE SON ERREUR ÉVENTUELLE. ---
+  // --- UPDATES A DATE FIELD (ISO) AND CLEARS ITS VALIDATION ERROR. ---
   const handleDateChange = (field: "dateOfBirth" | "startDate") => (isoValue: string) => {
     setValues((prev) => ({ ...prev, [field]: isoValue }))
     if (errors[field]) { setErrors((prev) => ({ ...prev, [field]: undefined })) }
   }
 
-  // --- MET À JOUR LE CHAMP MODIFIÉ ET EFFACE SON ERREUR ÉVENTUELLE. ---
+  // --- UPDATES THE CHANGED FIELD AND CLEARS ITS VALIDATION ERROR. ---
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const id = e.target.id as keyof Employee
     const { value } = e.target
@@ -45,7 +45,7 @@ export default function CreateEmployee() {
     if (errors[id]) { setErrors((prev) => ({ ...prev, [id]: undefined })) }
   }
 
-  // --- VALIDE LE FORMULAIRE, ENREGISTRE L'EMPLOYÉ DANS LE STORE ET RÉINITIALISE LES CHAMPS. ---
+  // --- VALIDATES THE FORM, SAVES THE EMPLOYEE TO THE STORE AND RESETS THE FIELDS. ---
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const validationErrors = validateForm(values)
@@ -58,13 +58,13 @@ export default function CreateEmployee() {
     setIsModalOpen(true)
   }
 
-  // --- FERME LA MODALE DE CONFIRMATION ET REDIRIGE VERS LA LISTE DES EMPLOYÉS. ---
+  // --- CLOSES THE CONFIRMATION MODAL AND REDIRECTS TO THE EMPLOYEE LIST. ---
   const handleCloseModal = () => {
     setIsModalOpen(false)
     navigate("/employees")
   }
 
-  // Rendu du composant
+  // Component render
   return (
     <main className="max-w-2xl mx-auto px-4 py-8">
       <Link to="/employees" className="text-primary hover:underline text-sm">
